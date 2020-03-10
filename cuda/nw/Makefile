@@ -6,7 +6,7 @@ INCLUDE := $(CUDA_DIR)/include
 
 SRC = needle.cu
 
-EXE = needle
+EXE = nw
 
 release: $(SRC)
 	$(CC) ${KERNEL_DIM} $(SRC) -o $(EXE) -I$(INCLUDE) -L$(CUDA_LIB_DIR) 
