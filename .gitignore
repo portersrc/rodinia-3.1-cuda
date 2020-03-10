@@ -34,3 +34,7 @@ cuda/srad/srad_v2/srad
 cuda/leukocyte/CUDA/avilib.h.gch
 cuda/leukocyte/CUDA/find_ellipse.h.gch
 cuda/leukocyte/CUDA/track_ellipse.h.gch
+cuda/backprop/backprop
+cuda/leukocyte/CUDA/leukocyte
+cuda/leukocyte/meschach_lib/meschach.a
+cuda/lud/cuda/lud_cuda
