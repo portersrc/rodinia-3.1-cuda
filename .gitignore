@@ -27,3 +27,7 @@ cuda/particlefilter/particlefilter_float
 cuda/particlefilter/particlefilter_naive
 cuda/pathfinder/pathfinder
 cuda/streamcluster/sc_gpu
+cuda/bfs/bfs
+cuda/gaussian/gaussian
+cuda/srad/srad_v1/srad
+cuda/srad/srad_v2/srad
