@@ -21,6 +21,7 @@ CUDA:
 	cd cuda/heartwall;  		make;	cp heartwall $(CUDA_BIN_DIR)
 	cd cuda/hotspot; 		make;	cp hotspot $(CUDA_BIN_DIR)
 	cd cuda/hotspot3D; 		make;	cp hotspot3D $(CUDA_BIN_DIR)
+	cd cuda/huffman; 		make;	cp huffman $(CUDA_BIN_DIR)
 	cd cuda/kmeans; 		make;	cp kmeans $(CUDA_BIN_DIR)
 	cd cuda/lavaMD;			make;	cp lavaMD $(CUDA_BIN_DIR)
 	cd cuda/leukocyte;  		make;	cp CUDA/leukocyte $(CUDA_BIN_DIR)
