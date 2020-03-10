@@ -1,1 +1,4 @@
+#!/bin/bash
 ./backprop 65536
+#./backprop 1048576
+#./backprop 1073741824

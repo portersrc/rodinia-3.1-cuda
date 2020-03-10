@@ -1,1 +1,2 @@
+#!/bin/bash
 ./CUDA/leukocyte  ../../data/leukocyte/testfile.avi 5 

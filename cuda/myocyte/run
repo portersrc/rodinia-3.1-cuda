@@ -1,1 +1,2 @@
+#!/bin/bash
 ./myocyte.out 100 1 0
