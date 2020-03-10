@@ -31,3 +31,6 @@ cuda/bfs/bfs
 cuda/gaussian/gaussian
 cuda/srad/srad_v1/srad
 cuda/srad/srad_v2/srad
+cuda/leukocyte/CUDA/avilib.h.gch
+cuda/leukocyte/CUDA/find_ellipse.h.gch
+cuda/leukocyte/CUDA/track_ellipse.h.gch
