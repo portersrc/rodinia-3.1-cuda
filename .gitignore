@@ -60,3 +60,5 @@ cuda/huffman/huffman
 cuda/mummergpu/NC_00399.out
 cuda/nw/nw
 cuda/pathfinder/result.txt
+cuda/myocyte/myocyte
+cuda/streamcluster/output.txt
