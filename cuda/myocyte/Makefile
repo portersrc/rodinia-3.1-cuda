@@ -13,7 +13,7 @@ myocyte.out:		main.o
 				-I/usr/local/cuda/include \
 				-L/usr/local/cuda/lib \
 				-lm -lcuda -lcudart \
-                                -o myocyte.out
+                                -o myocyte
 
 # compile main function file into object (binary)
 main.o:	define.c \
@@ -40,4 +40,4 @@ main.o:	define.c \
 
 # delete all object files
 clean:
-	rm *.o *.out output.txt
+	rm myocyte *.o *.out output.txt

@@ -34,6 +34,7 @@ CUDA:
 	cd cuda/particlefilter;		make;	cp particlefilter_naive particlefilter_float $(CUDA_BIN_DIR)       
 	cd cuda/pathfinder;		make;	cp pathfinder $(CUDA_BIN_DIR)
 	cd cuda/mummergpu;  		make;	cp bin/mummergpu $(CUDA_BIN_DIR)
+	cd cuda/myocyte;  		make;	cp myocyte $(CUDA_BIN_DIR)
 	cd cuda/hybridsort;              make;   cp hybridsort $(CUDA_BIN_DIR)
 	cd cuda/dwt2d;                   make;   cp dwt2d  $(CUDA_BIN_DIR)
 	
