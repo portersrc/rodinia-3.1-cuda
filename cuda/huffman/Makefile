@@ -9,7 +9,7 @@ GCC_OPTS=-O3 -Wall -Wextra -m64
 
 OBJ = main_test_cu.o stats_logger.o vlc_kernel_sm64huff.o scan.o pack_kernels.o cpuencode.o
 SRC = main_test_cu.cu
-EXE = pavle
+EXE = huffman
 
 ifdef TESTING 
 override TESTING = -DTESTING
@@ -19,7 +19,7 @@ ifdef CACHECWLUT
 override TESTING = -DCACHECWLUT
 endif
 
-pavle: $(OBJ) 
+huffman: $(OBJ)
 	$(NVCC) $(TESTING) $(CACHECWLUT) $(NVCC_OPTS) $(OBJ) -o $(EXE) 
 
 vlc_kernel_sm64huff.o: vlc_kernel_sm64huff.cu 
