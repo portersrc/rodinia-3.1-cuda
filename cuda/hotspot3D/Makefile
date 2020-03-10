@@ -10,7 +10,8 @@ EXE = hotspot3D
 
 OUTPUT = *.out
 
-FLAGS = -g -G #-arch sm_20 --ptxas-options=-v
+#FLAGS = -g -G #-arch sm_20 --ptxas-options=-v
+FLAGS = -arch sm_60
 release: $(SRC)
 	$(CC) $(KERNEL_DIM) $(FLAGS) $(SRC) -o $(EXE) -I$(INCLUDE) -L$(CUDA_LIB_DIR) 
 
