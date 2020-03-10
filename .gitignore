@@ -39,3 +39,4 @@ cuda/leukocyte/CUDA/leukocyte
 cuda/leukocyte/meschach_lib/meschach.a
 cuda/lud/cuda/lud_cuda
 cuda/bfs/result.txt
+cuda/b+tree/b+tree
