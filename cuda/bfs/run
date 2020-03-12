@@ -1,4 +1,16 @@
 #!/bin/bash
-#./bfs ../../data/bfs/graph1MW_6.txt
-#./bfs ../../data/bfs/graph4096.txt
-./bfs ../../data/bfs/graph65536.txt
+#./bfs ../../data/bfs/graph1MW_6.txt # 1.3s run time
+#./bfs ../../data/bfs/graph4096.txt # 0.1s run time
+#./bfs ../../data/bfs/graph65536.txt # 0.2s run time
+
+# Note: the majority of the time is spent loading this into memory. The time
+# spent on the GPU seems to be only 10% of the total time, maybe.
+#./bfs ../../data/bfs/inputGen/graph512k.txt # 0.7s
+#./bfs ../../data/bfs/inputGen/graph1M.txt # 1.5s
+#./bfs ../../data/bfs/inputGen/graph2M.txt # 2.9s
+#./bfs ../../data/bfs/inputGen/graph4M.txt # 5.7s
+#./bfs ../../data/bfs/inputGen/graph8M.txt # 11.1s
+
+# nvidia-smi for this process:
+#|    0     19432      C   ./bfs                                        729MiB |
+./bfs ../../data/bfs/inputGen/graph16M.txt # 23.4s
