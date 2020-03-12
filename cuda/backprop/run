@@ -1,4 +1,8 @@
 #!/bin/bash
-./backprop 65536
-#./backprop 1048576
-#./backprop 1073741824
+#./backprop 65536  # 2**16
+#./backprop 262144 # 2**18
+./backprop 524288 # 2**19
+#./backprop 1048576 # 2**20, this throws an error: "bpnn kernel error: invalid
+#                   # configuration argument"
+#./backprop 2097152 # 2**21, throw same error
+#./backprop 1073741824 # 2**30, this gets killed
