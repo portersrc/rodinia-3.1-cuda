@@ -45,12 +45,42 @@ double gettime() {
 unsigned int num_threads = 0;
 unsigned int num_blocks = 0;
 
+
+void _get_device(void)
+{
+	int d = 42;
+	cudaError_t e;
+	printf("Getting device...\n");
+	e = cudaGetDevice(&d);
+	printf("  error: %d\n", e);
+	printf("  my device is %d\n", d);
+	printf("\n");
+}
+void _set_device(int d)
+{
+	cudaError_t e;
+	printf("Setting device to %d\n", d);
+	e = cudaSetDevice(d);
+	printf("  error: %d\n", e);
+	printf("\n");
+}
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
 int
 main( int argc, char** argv) 
 {
+	/*cudaError_t e;
+	int d = 42;
+	_get_device();
+	_set_device();
+	_get_device();*/
+	_set_device(atoi(argv[2]));
 	setup(argc, argv);
 }
 
