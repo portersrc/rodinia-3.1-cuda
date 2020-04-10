@@ -27,6 +27,7 @@ backprop_face()
   printf("Training done\n");
 }
 
+
 int setup(argc, argv)
 int argc;
 char *argv[];
@@ -34,8 +35,8 @@ char *argv[];
 	
   int seed;
 
-  if (argc!=2){
-  fprintf(stderr, "usage: backprop <num of input elements>\n");
+  if (argc!=3){
+  fprintf(stderr, "usage: backprop <num of input elements> <which gpu device>\n");
   exit(0);
   }
   layer_size = atoi(argv[1]);
@@ -43,8 +44,7 @@ char *argv[];
   fprintf(stderr, "The number of input points must be divided by 16\n");
   exit(0);
   }
-  
-
+ 
   seed = 7;   
   bpnn_initialize(seed);
   backprop_face();
