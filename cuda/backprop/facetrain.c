@@ -35,7 +35,7 @@ char *argv[];
 	
   int seed;
 
-  if (argc!=3){
+  if (argc!=2){
   fprintf(stderr, "usage: backprop <num of input elements> <which gpu device>\n");
   exit(0);
   }

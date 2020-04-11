@@ -82,8 +82,8 @@ main( int argc, char** argv)
     _get_device();
     _set_device();
     _get_device();*/
-    //bemps_init();
-    _set_device(atoi(argv[2]));
+    //_set_device(atoi(argv[2]));
+    bemps_init();
     setup(argc, argv);
 }
 
@@ -152,7 +152,11 @@ void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
   cudaMemcpy(input_hidden_cuda, input_weights_one_dim, (in + 1) * (hid + 1) * sizeof(float), cudaMemcpyHostToDevice);
 
   
-  
+  bemps_beacon_t beacon = {
+      .mem_fp_B       = 1024,
+      .kernel_time_us = 1000000
+  };
+  bemps_beacon(&beacon);
   bpnn_layerforward_CUDA<<< grid, threads >>>(input_cuda,
                                               output_hidden_cuda,
     										  input_hidden_cuda,
