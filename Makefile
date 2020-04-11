@@ -13,6 +13,7 @@ OCL_DIRS  := backprop bfs cfd gaussian heartwall hotspot kmeans lavaMD leukocyte
 all: CUDA OMP OPENCL
 
 CUDA: 
+	@mkdir -p $(CUDA_BIN_DIR)
 	cd cuda/backprop;		make;	cp backprop $(CUDA_BIN_DIR)
 	cd cuda/b+tree;			make;	cp b+tree $(CUDA_BIN_DIR)
 	cd cuda/bfs; 			make;	cp bfs $(CUDA_BIN_DIR)
