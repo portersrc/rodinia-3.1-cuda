@@ -12,6 +12,8 @@
 #include "backprop_cuda_kernel.cu"
 #include "backprop.h"
 
+#include <bemps/bemps.hpp>
+
 ////////////////////////////////////////////////////////////////////////////////
 
 extern "C"
@@ -80,6 +82,7 @@ main( int argc, char** argv)
 	_get_device();
 	_set_device();
 	_get_device();*/
+    //bemps_init();
 	_set_device(atoi(argv[2]));
 	setup(argc, argv);
 }
