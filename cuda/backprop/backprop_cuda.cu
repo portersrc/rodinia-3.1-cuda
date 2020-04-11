@@ -50,21 +50,21 @@ unsigned int num_blocks = 0;
 
 void _get_device(void)
 {
-	int d = 42;
-	cudaError_t e;
-	printf("Getting device...\n");
-	e = cudaGetDevice(&d);
-	printf("  error: %d\n", e);
-	printf("  my device is %d\n", d);
-	printf("\n");
+    int d = 42;
+    cudaError_t e;
+    printf("Getting device...\n");
+    e = cudaGetDevice(&d);
+    printf("  error: %d\n", e);
+    printf("  my device is %d\n", d);
+    printf("\n");
 }
 void _set_device(int d)
 {
-	cudaError_t e;
-	printf("Setting device to %d\n", d);
-	e = cudaSetDevice(d);
-	printf("  error: %d\n", e);
-	printf("\n");
+    cudaError_t e;
+    printf("Setting device to %d\n", d);
+    e = cudaSetDevice(d);
+    printf("  error: %d\n", e);
+    printf("\n");
 }
 
 
@@ -77,14 +77,14 @@ void _set_device(int d)
 int
 main( int argc, char** argv) 
 {
-	/*cudaError_t e;
-	int d = 42;
-	_get_device();
-	_set_device();
-	_get_device();*/
+    /*cudaError_t e;
+    int d = 42;
+    _get_device();
+    _set_device();
+    _get_device();*/
     //bemps_init();
-	_set_device(atoi(argv[2]));
-	setup(argc, argv);
+    _set_device(atoi(argv[2]));
+    setup(argc, argv);
 }
 
 
@@ -119,11 +119,11 @@ void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
   partial_sum = (float *) malloc(num_blocks * WIDTH * sizeof(float));
  
   // this preprocessing stage is added to correct the bugs of wrong memcopy using two-dimensional net->inputweights
-  for (int k = 0; k <= in; k++) {	
+  for (int k = 0; k <= in; k++) {    
    for (int j = 0; j <= hid; j++) {
-	  input_weights_one_dim[m] = net->input_weights[k][j];
-	  input_weights_prev_one_dim[m] = net-> input_prev_weights[k][j];
-	  m++;
+      input_weights_one_dim[m] = net->input_weights[k][j];
+      input_weights_prev_one_dim[m] = net-> input_prev_weights[k][j];
+      m++;
     }
   }
   
@@ -154,29 +154,29 @@ void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
   
   
   bpnn_layerforward_CUDA<<< grid, threads >>>(input_cuda,
-	                                          output_hidden_cuda,
-											  input_hidden_cuda,
-											  hidden_partial_sum,
-											  in,
-											  hid);
+                                              output_hidden_cuda,
+    										  input_hidden_cuda,
+    										  hidden_partial_sum,
+    										  in,
+    										  hid);
  
   cudaThreadSynchronize();
   
   cudaError_t error = cudaGetLastError();
-	if (error != cudaSuccess) {
-		printf("bpnn kernel error: %s\n", cudaGetErrorString(error));
-		exit(EXIT_FAILURE);
-	}
+    if (error != cudaSuccess) {
+    	printf("bpnn kernel error: %s\n", cudaGetErrorString(error));
+    	exit(EXIT_FAILURE);
+    }
   
   cudaMemcpy(partial_sum, hidden_partial_sum, num_blocks * WIDTH * sizeof(float), cudaMemcpyDeviceToHost);
      
   for (int j = 1; j <= hid; j++) {
     sum = 0.0;
-    for (int k = 0; k < num_blocks; k++) {	
+    for (int k = 0; k < num_blocks; k++) {    
       sum += partial_sum[k * hid + j-1] ;
     }
-	sum += net->input_weights[0][j];
-	net-> hidden_units[j] = float(1.0 / (1.0 + exp(-sum)));
+    sum += net->input_weights[0][j];
+    net-> hidden_units[j] = float(1.0 / (1.0 + exp(-sum)));
   }
   #endif
 
@@ -203,12 +203,12 @@ void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
 
 
   bpnn_adjust_weights_cuda<<< grid, threads >>>(hidden_delta_cuda,  
-												hid, 
-												input_cuda, 
-												in,
-												input_hidden_cuda, 
-												input_prev_weights_cuda
-												);
+    											hid, 
+    											input_cuda, 
+    											in,
+    											input_hidden_cuda, 
+    											input_prev_weights_cuda
+    											);
 
   cudaMemcpy(net->input_units, input_cuda, (in + 1) * sizeof(float), cudaMemcpyDeviceToHost);
   cudaMemcpy(input_weights_one_dim, input_hidden_cuda, (in + 1) * (hid + 1) * sizeof(float), cudaMemcpyDeviceToHost);
