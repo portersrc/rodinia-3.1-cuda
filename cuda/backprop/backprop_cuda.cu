@@ -87,6 +87,12 @@ main( int argc, char** argv)
     setup(argc, argv);
 }
 
+void CUDART_CB kernel_complete_cb(cudaStream_t stream, cudaError_t status, void *data)
+{
+  printf("kernel_compelte_cb\n");
+}
+
+
 
 extern "C"
 void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
@@ -156,6 +162,7 @@ void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
       .mem_fp_B       = 1024,
       .kernel_time_us = 1000000
   };
+  cudaStreamAddCallback(0, kernel_complete_cb, NULL, 0);
   bemps_beacon(&beacon);
   bpnn_layerforward_CUDA<<< grid, threads >>>(input_cuda,
                                               output_hidden_cuda,
