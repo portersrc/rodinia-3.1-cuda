@@ -10,7 +10,7 @@ CUDA_DIRS := backprop bfs cfd gaussian heartwall hotspot kmeans lavaMD leukocyte
 OMP_DIRS  := backprop bfs cfd 		   heartwall hotspot kmeans lavaMD leukocyte lud nn nw srad streamcluster particlefilter pathfinder mummergpu
 OCL_DIRS  := backprop bfs cfd gaussian heartwall hotspot kmeans lavaMD leukocyte lud nn	nw srad streamcluster particlefilter pathfinder
 
-all: CUDA OMP OPENCL
+all: CUDA
 
 CUDA: 
 	@mkdir -p $(CUDA_BIN_DIR)
@@ -82,5 +82,5 @@ OPENCL:
 clean: CUDA_clean
 
 CUDA_clean:
-	cd $(CUDA_BIN_DIR) && rm -f *
+	rm -rf bin/
 	for dir in $(CUDA_DIRS) ; do cd cuda/$$dir ; make clean ; cd ../.. ; done
