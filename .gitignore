@@ -62,5 +62,3 @@ cuda/nw/nw
 cuda/pathfinder/result.txt
 cuda/myocyte/myocyte
 cuda/streamcluster/output.txt
-
-drive.sh
