@@ -88,7 +88,7 @@ main( int argc, char** argv)
       .mem_fp_B       = 1024,
       .kernel_time_us = 1000000
     };
-    bemps_beacon(&beacon);
+    bemps_beacon(0, &beacon);
     setup(argc, argv);
 }
 
@@ -169,6 +169,7 @@ void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
   //};
   ////cudaStreamAddCallback(0, kernel_complete_cb, NULL, 0);
   //bemps_beacon(&beacon);
+  bemps_set_cuda_callback(0);
   bpnn_layerforward_CUDA<<< grid, threads >>>(input_cuda,
                                               output_hidden_cuda,
     										  input_hidden_cuda,
