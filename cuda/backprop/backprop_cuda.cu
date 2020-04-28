@@ -1,6 +1,7 @@
 
 
 // includes, system
+//#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -47,6 +48,8 @@ double gettime() {
 unsigned int num_threads = 0;
 unsigned int num_blocks = 0;
 
+const int bemps_tid_0 = 0;
+
 
 void _get_device(void)
 {
@@ -85,10 +88,10 @@ main( int argc, char** argv)
     //_set_device(atoi(argv[2]));
     bemps_init();
     bemps_beacon_t beacon = {
-      .mem_fp_B       = 1024,
-      .kernel_time_us = 1000000
+      .mem_B = 183 * 1024 * 1024, // gotten from profiling with nvidia-smi and sleep
+      .cores = 1 // ignored
     };
-    bemps_beacon(0, &beacon);
+    bemps_beacon(bemps_tid_0, &beacon);
     setup(argc, argv);
 }
 
@@ -169,7 +172,8 @@ void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
   //};
   ////cudaStreamAddCallback(0, kernel_complete_cb, NULL, 0);
   //bemps_beacon(&beacon);
-  bemps_set_cuda_callback(0);
+  //bemps_set_cuda_callback(0);
+
   bpnn_layerforward_CUDA<<< grid, threads >>>(input_cuda,
                                               output_hidden_cuda,
     										  input_hidden_cuda,
@@ -219,6 +223,8 @@ void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
   cudaMemcpy(input_hidden_cuda, input_weights_one_dim, (in + 1) * (hid + 1) * sizeof(float), cudaMemcpyHostToDevice);
 
 
+  // No need for bemps_set_device(bemps_tid_0). This kernel is part of the
+  // same bemps task for now.
   bpnn_adjust_weights_cuda<<< grid, threads >>>(hidden_delta_cuda,  
     											hid, 
     											input_cuda, 
@@ -226,6 +232,7 @@ void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
     											input_hidden_cuda, 
     											input_prev_weights_cuda
     											);
+  //sleep(10);
 
   cudaMemcpy(net->input_units, input_cuda, (in + 1) * sizeof(float), cudaMemcpyDeviceToHost);
   cudaMemcpy(input_weights_one_dim, input_hidden_cuda, (in + 1) * (hid + 1) * sizeof(float), cudaMemcpyDeviceToHost);
@@ -236,6 +243,8 @@ void bpnn_train_cuda(BPNN *net, float *eo, float *eh)
   cudaFree(hidden_partial_sum);
   cudaFree(input_prev_weights_cuda);
   cudaFree(hidden_delta_cuda);
+
+  bemps_free(bemps_tid_0);
   
   free(partial_sum);
   free(input_weights_one_dim);
